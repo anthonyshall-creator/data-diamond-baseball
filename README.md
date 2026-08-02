@@ -1,5 +1,10 @@
 # Baseball Sim
 
+![React](https://img.shields.io/badge/react-19-61DAFB?logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-8-646CFF?logo=vite&logoColor=white)
+![Vitest](https://img.shields.io/badge/tested%20with-vitest-6E9F18?logo=vitest&logoColor=white)
+![License](https://img.shields.io/badge/license-proprietary-lightgrey)
+
 A stat-based baseball simulator in the spirit of *Micro League Baseball*: real
 player stats drive probabilistic at-bat outcomes, rather than arcade-style
 reflexes or direct player control. v1 is a single exhibition game between the
