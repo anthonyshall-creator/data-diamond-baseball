@@ -1,0 +1,154 @@
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+
+header h1 {
+  margin: 0 0 4px;
+  font-size: 1.6rem;
+}
+
+.matchup {
+  margin: 0 0 20px;
+  color: var(--text-muted, #888);
+}
+
+.season-tag {
+  margin-left: 8px;
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.controls button {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid #666;
+  background: transparent;
+  cursor: pointer;
+}
+
+.controls button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.controls button.primary {
+  background: #2a6f2a;
+  color: white;
+  border-color: #2a6f2a;
+}
+
+.status {
+  font-family: 'Courier New', monospace;
+  font-size: 1.05rem;
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.status-final {
+  font-weight: bold;
+}
+
+table.linescore,
+table.box-table {
+  border-collapse: collapse;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+table.linescore th,
+table.linescore td,
+table.box-table th,
+table.box-table td {
+  border: 1px solid #555;
+  padding: 4px 8px;
+  text-align: center;
+}
+
+table.linescore .team-col,
+table.box-table .name-col {
+  text-align: left;
+}
+
+table.linescore td.total {
+  font-weight: bold;
+}
+
+table.box-table caption {
+  text-align: left;
+  font-weight: bold;
+  padding: 6px 0;
+}
+
+table.box-table .totals-row {
+  font-weight: bold;
+  border-top: 2px solid #777;
+}
+
+.columns {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.play-log {
+  flex: 1 1 380px;
+  min-width: 320px;
+}
+
+.play-log h2 {
+  font-size: 1.1rem;
+  margin: 0 0 8px;
+}
+
+.play-log-scroll {
+  height: 480px;
+  overflow-y: auto;
+  border: 1px solid #555;
+  border-radius: 4px;
+  padding: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+}
+
+.play-log-line {
+  display: flex;
+  gap: 8px;
+  padding: 3px 0;
+  border-bottom: 1px dashed #3a3a3a;
+}
+
+.play-log-inning {
+  flex: 0 0 32px;
+  opacity: 0.6;
+}
+
+.play-log-text {
+  flex: 1 1 auto;
+}
+
+.play-log-score {
+  flex: 0 0 46px;
+  text-align: right;
+  opacity: 0.7;
+}
+
+.boxscore {
+  flex: 1 1 500px;
+  min-width: 420px;
+}
