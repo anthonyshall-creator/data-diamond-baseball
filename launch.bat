@@ -1,6 +1,6 @@
 @echo off
-title Baseball Sim
+title Data Diamond Baseball
 cd /d "%~dp0"
-echo Starting Baseball Sim dev server...
+echo Starting Data Diamond Baseball dev server...
 call npm run dev -- --open
 pause

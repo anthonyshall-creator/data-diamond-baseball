@@ -68,7 +68,7 @@ export default function App() {
   return (
     <div className="app">
       <header>
-        <h1>Exhibition Game</h1>
+        <h1>Data Diamond Baseball</h1>
         <p className="matchup">
           {AWAY.name} @ {HOME.name} <span className="season-tag">2021 season stats</span>
         </p>
