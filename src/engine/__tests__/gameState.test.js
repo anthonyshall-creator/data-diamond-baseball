@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { simulateGame } from '../gameState.js';
+import { createGame, advance, simulateGame } from '../gameState.js';
 import { mulberry32 } from '../rng.js';
 import { braves2021 } from '../../data/teams/braves2021.js';
 import { astros2021 } from '../../data/teams/astros2021.js';
@@ -67,5 +67,43 @@ describe('simulateGame', () => {
     // without a shortened game; at minimum the starter should have recorded
     // some outs.
     expect(homeOutsByPitcher[0]).toBeGreaterThan(0);
+  });
+
+  it('records lastPlay with a before/after base snapshot the UI can animate', () => {
+    const state = createGame(astros2021, braves2021);
+    expect(state.lastPlay).toBeNull();
+
+    advance(state, mulberry32(1));
+
+    expect(state.lastPlay).not.toBeNull();
+    expect(state.lastPlay.batter.name).toBe(state.away.lineup[0].name);
+    expect(state.lastPlay.basesBefore).toEqual({ first: null, second: null, third: null });
+    expect(state.lastPlay.basesAfter).toBe(state.bases);
+    expect(Array.isArray(state.lastPlay.runsScored)).toBe(true);
+    expect(state.lastPlay.outcome).toHaveProperty('type');
+  });
+
+  it("the first play of a new half-inning always starts from empty basesBefore, so the diamond can't inherit stranded runners from the half that just ended", () => {
+    const state = createGame(astros2021, braves2021);
+    const rng = mulberry32(1);
+    const empty = { first: null, second: null, third: null };
+    let halfBeforeThisAdvance = state.half;
+    let expectEmptyNext = false;
+    let checkedAtLeastOnce = false;
+
+    for (let i = 0; i < 200 && !state.gameOver; i++) {
+      advance(state, rng);
+
+      if (expectEmptyNext) {
+        expect(state.lastPlay.basesBefore).toEqual(empty);
+        checkedAtLeastOnce = true;
+        expectEmptyNext = false;
+      }
+
+      expectEmptyNext = state.half !== halfBeforeThisAdvance;
+      halfBeforeThisAdvance = state.half;
+    }
+
+    expect(checkedAtLeastOnce).toBe(true);
   });
 });

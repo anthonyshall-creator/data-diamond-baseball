@@ -61,10 +61,21 @@ entered by hand from Baseball-Reference's 2021 season totals. See
 `statConversion.js` for the exact fields each player record needs if you want
 to add another team.
 
+## The diamond
+
+`src/components/Diamond.jsx` renders a simple pixel-art-style SVG diamond:
+grass, infield dirt, foul lines, bases, a pitcher and batter with an idle bob
+animation, and a batted ball that flies toward a spot on the field sized by
+hit type (short for a groundout, deep for a home run). Baserunners are
+tracked by id and slide between bases as `gameState.js`'s `lastPlay` snapshot
+(the base state immediately before and after each plate appearance) changes.
+The ball's landing spot is randomized for visual variety only — it isn't
+driven by the engine's RNG and has no effect on the outcome.
+
 ## What's not here yet
 
-This is Phase 1 of the build (see the original build prompt for the full
-roadmap). Not yet implemented: the pixel-art animated diamond, manager
-controls (pinch hitters, steals, bunts, mid-game pitching changes), a
-roster/team editor, and season/series/franchise modes. The engine is
-structured to support all of these without a rewrite.
+This is Phase 1+3 of the build (see the original build prompt for the full
+roadmap). Not yet implemented: manager controls (pinch hitters, steals,
+bunts, mid-game pitching changes), a roster/team editor, and season/series/
+franchise modes. The engine is structured to support all of these without a
+rewrite.

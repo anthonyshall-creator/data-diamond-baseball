@@ -5,6 +5,7 @@ import { braves2021 } from './data/teams/braves2021.js';
 import LineScore from './components/LineScore.jsx';
 import BoxScore from './components/BoxScore.jsx';
 import PlayLog from './components/PlayLog.jsx';
+import Diamond from './components/Diamond.jsx';
 import './App.css';
 
 const AWAY = astros2021;
@@ -42,6 +43,7 @@ function GameStatus({ state }) {
 export default function App() {
   const gameRef = useRef(createGame(AWAY, HOME));
   const [, setTick] = useState(0);
+  const [gameId, setGameId] = useState(0);
   const rerender = () => setTick((t) => t + 1);
   const state = gameRef.current;
 
@@ -62,6 +64,7 @@ export default function App() {
 
   function newGame() {
     gameRef.current = createGame(AWAY, HOME);
+    setGameId((id) => id + 1);
     rerender();
   }
 
@@ -85,6 +88,7 @@ export default function App() {
       </div>
 
       <GameStatus state={state} />
+      <Diamond key={gameId} lastPlay={state.lastPlay} />
       <LineScore state={state} away={AWAY} home={HOME} />
 
       <div className="columns">

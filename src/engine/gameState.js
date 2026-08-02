@@ -16,6 +16,7 @@ export function createGame(awayTeam, homeTeam) {
     runsThisHalf: 0,
     lineScore: { away: [], home: [] },
     log: [],
+    lastPlay: null,
     gameOver: false,
   };
 }
@@ -161,7 +162,16 @@ export function advance(state, rng) {
   const fatiguedRates = applyFatigue(pitcher.rates, pitcher.pitchCount);
 
   const outcome = resolveAtBat(batter.rates, fatiguedRates, rng);
+  const basesBefore = state.bases;
   const result = advanceRunners(state.bases, state.outs, outcome, batter, rng);
+
+  state.lastPlay = {
+    batter: { id: batter.id, name: batter.name },
+    outcome,
+    basesBefore,
+    basesAfter: result.bases,
+    runsScored: result.runsScored,
+  };
 
   state.bases = result.bases;
   state.outs += result.outsRecorded;
