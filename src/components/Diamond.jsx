@@ -35,7 +35,10 @@ function ballTargetFor(outcome) {
   return fn ? fn() : null;
 }
 
-const RUNNER_ANIMATION_MS = 700;
+// Ball/runner CSS transitions run ~0.6s; the extra time beyond that is how
+// long the ball sits at its landing spot (and a scoring runner sits on home
+// plate) before disappearing, so the result is actually visible.
+const PLAY_SETTLE_MS = 1300;
 
 export default function Diamond({ lastPlay }) {
   const [runners, setRunners] = useState({});
@@ -81,7 +84,7 @@ export default function Diamond({ lastPlay }) {
         });
       }
       setBall(null);
-    }, RUNNER_ANIMATION_MS);
+    }, PLAY_SETTLE_MS);
 
     return () => {
       cancelAnimationFrame(raf);

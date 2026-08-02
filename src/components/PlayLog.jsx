@@ -1,16 +1,21 @@
 import { useEffect, useRef } from 'react';
 
 export default function PlayLog({ state }) {
-  const bottomRef = useRef(null);
+  const scrollRef = useRef(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ block: 'nearest' });
+    // Scroll only this box's own internal scrollbar to its bottom. Using
+    // scrollIntoView here would also drag the outer page scroll position
+    // along with it, since it walks every scrollable ancestor including the
+    // window — which is what was yanking the diamond out of view.
+    const el = scrollRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
   }, [state.log.length]);
 
   return (
     <div className="play-log">
       <h2>Play-by-Play</h2>
-      <div className="play-log-scroll">
+      <div className="play-log-scroll" ref={scrollRef}>
         {state.log.map((entry, i) => (
           <div key={i} className="play-log-line">
             <span className="play-log-inning">
@@ -23,7 +28,6 @@ export default function PlayLog({ state }) {
             </span>
           </div>
         ))}
-        <div ref={bottomRef} />
       </div>
     </div>
   );
